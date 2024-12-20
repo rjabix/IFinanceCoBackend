@@ -9,7 +9,7 @@ public abstract class IFinanceDbContext(DbContextOptions options) : IdentityDbCo
 }
 public class FinanceDbContext(DbContextOptions<FinanceDbContext> options) : IFinanceDbContext(options)
 {
-    // public DbSet<Transaction> Transactions { get; set; } - are in IFinanceDbContext
+    public DbSet<Transaction> Transactions { get; set; } - are in IFinanceDbContext
     
     // protected override void OnModelCreating(ModelBuilder modelBuilder)
     // {
