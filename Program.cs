@@ -1,4 +1,5 @@
 using IFinanceCoBackend.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 
@@ -34,5 +35,19 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.MapPost("checkauth", async (HttpContext httpContext, UserManager<AppUser> userManager) =>
+{
+    var userName = httpContext.User.Identity?.Name;
+    if (userName == null)
+    {
+        return Results.NotFound();
+    }
+
+    var userExists = await userManager.Users.AsNoTracking()
+        .AnyAsync(u => u.UserName == userName);
+
+    return userExists ? Results.Ok() : Results.NotFound();
+}).RequireAuthorization();
 
 app.Run();

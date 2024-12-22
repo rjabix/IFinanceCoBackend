@@ -23,6 +23,11 @@ public class Transaction
     public bool IsIncome { get; set; }
     
     public TransactionType Type { get; set; }
+
+    public bool IsPublic { get; set; } = false;
+    
+    [MaxLength(50)]
+    public string? ShareUrl { get; set; }
 }
 
 public enum TransactionType
@@ -38,6 +43,7 @@ public enum TransactionType
     Entertainment,
     Health,
     Education,
+    Electronics,
     Alcohol,
     
     Other
